@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header class="board-header">
+        <h1>Tracker</h1>
+        <div class="header-controls">
+            <button id="dashboard-btn" class="header-btn"><i class="fas fa-chart-pie"></i> Dashboard</button>
+            <button id="import-btn" class="header-btn"><i class="fas fa-upload"></i> Import</button>
+            <button id="export-btn" class="header-btn"><i class="fas fa-download"></i> Export</button>
+            <input type="file" id="import-file" style="display: none;" accept=".json">
+            
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search tasks...">
+            </div>
+            <div class="theme-switch-container">
+                <i class="fas fa-sun"></i>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+    </header>
+    <main class="kanban-board">
+        </main>
+    <div class="add-new-column-container">
+        <button id="add-column-btn" class="add-column-btn"><i class="fas fa-plus"></i> Add another column</button>
+    </div>
+
+
+    <div id="details-modal" class="modal">
+         <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="details-title">Task Details</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <div id="details-body" class="modal-body">
+                <div id="details-checklist-container"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="edit-task-btn" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit Task
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="form-modal-title">Add New Task</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+                <div class="form-group">
+                    <label for="task-title">Title</label>
+                    <input type="text" id="task-title" required placeholder="e.g., Design new landing page">
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description" rows="4" placeholder="Add a more detailed description..."></textarea>
+                </div>
+                <div class="form-group">
+                     <label for="task-due-date">Due Date & Time</label>
+                     <input type="datetime-local" id="task-due-date">
+                </div>
+                <div class="form-group">
+                    <label>Priority</label>
+                    <div class="priority-selector">
+                        <input type="radio" id="priority-low" name="priority" value="low">
+                        <label for="priority-low" class="priority-option low">Low</label>
+                        <input type="radio" id="priority-medium" name="priority" value="medium" checked>
+                        <label for="priority-medium" class="priority-option medium">Medium</label>
+                        <input type="radio" id="priority-high" name="priority" value="high">
+                        <label for="priority-high" class="priority-option high">High</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Checklist / Sub-tasks</label>
+                    <div id="checklist-container">
+                        <div id="checklist-items-list">
+                            </div>
+                        <div class="add-checklist-item-container">
+                            <input type="text" id="new-checklist-item-input" placeholder="Add a sub-task...">
+                            <button type="button" id="add-checklist-item-btn" class="btn-add-item">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Dashboard & Stats</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <div id="dashboard-body" class="modal-body">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Tasks</h3>
+                        <p id="stat-total-tasks">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Tasks Completed</h3>
+                        <p id="stat-completed-tasks">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Overdue Tasks</h3>
+                        <p id="stat-overdue-tasks">0</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Tasks by Priority</h3>
+                    <div id="priority-chart-container">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
